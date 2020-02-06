@@ -1,0 +1,1249 @@
+---
+title: "Portfolio"
+author: "Andre L S Rodrigues"
+subtitle: Skills in R
+output:
+   html_document:
+      toc: yes
+      theme: cosmo
+      highlight: tango
+      code_folding: hide
+      fig_width: 12
+      fig_height: 8
+runtime: shiny
+params:
+  d: !r Sys.Date()
+---
+
+
+![](https://i.ibb.co/mXvdH3h/Fiap-logo-novo.jpg){ width=20% }
+
+##### Today's date is `r params$d`
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+rm(list = ls())
+library(plotly)
+library(stargazer)
+```
+
+******
+# Contents {.tabset .tabset-fade .tabset-pills}
+
+## Purpose of this document
+
+The purpose of this document is to demonstrate some skills I have got in R during my course of "Programming AI with R" in the MBA Artificial Intelligence and Machine Learning given by FIAP University in 2019.
+
+Built with
+`r getRversion()`
+
+## CLASS 01 (12/06/2019)
+
+* Atribuição de Variáveis
+```{r}
+x <- 1
+y <- 2
+```
+
+
+* Checar o ambiente de programacao
+```{r}
+getwd()
+# setwd("c:/Users/logonpflocal/Documentos/")
+```
+
+
+* Salvar arquivos
+```{r}
+# save.image("dados.Rdata")
+# save(x, file ="dados.Rdata")
+rm(list = ls())
+```
+
+
+informacao sobre funcoes
+```{r}
+?choose.files
+help("choose.files")
+save.image(choose.files())
+```
+
+
+instalar pacotes
+```{r}
+install.packages("ggplot2")
+library("ggplot2")
+detach("package:ggplot2", unload = TRUE)
+remove.packages("ggplot2")
+```
+
+
+* Arredondamento
+```{r}
+x <- 5
+y <- pi
+y <- round(y, digits = 2)
+y
+```
+
+
+* Consultar classe da varia?vel
+```{r}
+class(x)
+x <- as.integer(x)
+```
+
+
+* Teste de visualizacao
+```{r}
+df <- mtcars
+head(df)
+ggplot2::qplot(mpg,wt, data=df, colour = as.factor(cyl))
+```
+
+
+* Atribuicao de vetores
+```{r}
+vet_num <- c(1,2,3,4)
+  #exercicio 2
+vetor_a <- c(1,2,3,4)
+vetor_b <- c(5,6,7,8)
+vetor_c <- vetor_a + vetor_b
+```
+
+
+* Nomeando vetores
+```{r}
+idades <- c(34,25,31,17)
+names(idades)[1] <- "Wilian"
+names(idades) <- c("Wilian","Marcelo","Lucas","Rafael")
+idades
+idades["Marcelo"]
+```
+
+
+* Matrizes
+```{r}
+m1 <- matrix(c(12,22,35,4,5,6,7,8,9), nrow =3)
+m1 <- matrix(1:9, nrow = 3)
+m1
+m1[1:3]
+
+```
+
+* Dataframes e seus comandos
+```{r}
+df
+class(df)
+head(df, 10)
+tail(df)
+ncol(df)
+nrow(df)
+summary(df)
+c <- diamonds
+library("ggplot2")
+head(diamonds)
+ggplot2::qplot(carat,price, data=c)
+class(diamonds)
+lapply(mtcars, class)
+```
+
+
+* Exercicio final
+```{r}
+m1 <- matrix(seq(2L,32L,2L), nrow = 4, ncol = 4)
+m1
+m2 <- matrix((1:16), nrow = 4) *2
+m2
+```
+
+
+
+* Exercicio final dataframe
+
+```{r}
+df1 <- data.frame(row.names = c("L1","L2","L3","L4")
+                  , nome_vetor_1 = v1
+                  , nome_vetor_2 = v2
+                  , nome_vetor_3 = v3
+                  , nome_vetor_4 = v4
+                  , nome_vetor_5 = v5)
+```
+
+## CLASS 02 - (27/06/2019)
+
+* Instalacao mais fácil do R markdown
+```{r}
+# path <- "http://raw.githubusercontent.com/elthonf/fiap-mba-r/master/"
+# source(file = paste0(path, 'gereral_codes/inst_rmarkdown.r'))
+```
+
+
+* Sequencias
+```{r}
+vetor_1 <- 1:9
+vetor_2 <- 80:32
+vetor_3 <- 4:-2
+vetor_4 <- 3:3
+vetor_5 <- seq(1,9)
+identical(vetor_1, vetor_5)
+
+vetor_6 <- seq(1,10, by = 2)
+vetor_7 <- seq(1,10, by = pi)
+seq(15)
+seq(0,1, length.out = 12)
+seq(8,10, along.with = c(1,1))
+seq_along(c(1,56,21))
+seq_len(5)
+```
+
+
+* Repeticao
+```{r}
+rep(0, times = 5)
+rep(c(1,2,3), times = 3)
+rep(c(1,2,3), each = 3)
+rep(12, length.out = 4)
+rep(c(1,2,3), length.out = 7)
+
+my_seq <- seq(5,10, length.out = 30)
+length(my_seq)
+10:pi
+pi:10
+seq_along(my_seq)
+seq(along.with = my_seq)
+seq(1,length(my_seq), along.with = my_seq)
+
+c(1,2,3,NA)
+c(1,2,3,NULL)
+
+vet1 <- c(1L,3L, NA)
+class(vet1)
+mean(vet1)
+```
+
+* Example dataframe
+```{r}
+Name <- c("joão","maria","diego")
+Sex <- c("male",NA,"male")
+Age <- c(45,NA, NA)
+dt <- data.frame(Name, Sex, Age)
+dt
+is.na(dt)
+sum(is.na(dt))
+c <- 19/0
+is.infinite(c)
+```
+
+
+* Subconjunto
+  + Vetor
+```{r}
+vetor_1
+vetor_1[2:5]
+```
+
+
+* Dataframe
+```{r}
+mtcars
+mtcars[1,2]
+mtcars[1:5,2]
+mtcars[1:5, 1:5]
+mtcars[1:5, c(1,2,4)]
+mtcars["Mazda RX4",c("mpg","cyl","hp")] #like
+
+lista <- list(a = c(1,2,3), b= c("casa","comida","roupalavada"), c = c(Inf, NA, -Inf))
+lista["a"]
+class(lista["a"])
+lista[["a"]]
+lista$a
+
+install.packages("sqldf")
+library(sqldf)
+sqldf("select cyl,hp from mtcars")
+```
+
+
+* Data
+```{r}
+dia_texto <- "19/02/1990 T 07:45:30"
+dia_date <- as.Date(dia_texto, "%d/%m/%Y T %H:%M:%S", tz= "America/Sao_Paulo")
+dia.time1 <- as.POSIXct(dia_texto, format = "%d/%m/%Y T %H:%M:%S", tz= "America/Sao_Paulo")
+dia.time1
+```
+
+
+* Mostra o que está acontecendo por trás
+```{r}
+unclass(dia.time1)
+dia.time2 <- as.POSIXlt(dia_texto, format = "%d/%m/%Y T %H:%M:%S", tz= "America/Sao_Paulo")
+unclass(dia.time2)
+dia.time2$mon
+```
+
+
+* Biblioteca para a gestão de dados de data e tempo
+```{r}
+install.packages("lubridate")
+library(lubridate)
+lub_date1 <- ymd("20110604")
+lub_date1
+date_1 <- as.Date("2011-06-04")
+date_1
+identical(lub_date1, date_1)
+lub_date2 <- dmy("01-02-1988")
+lub_date2
+```
+
+
+* System
+```{r}
+now()
+today()
+```
+
+
+* Operacoes com data
+```{r}
+lub_date3 <- lub_date2 + ddays(2) + dyears(1)
+lub_date2
+lub_date3
+```
+
+
+* Resolucao do exercicio
+```{r}
+lub1 <- as.duration(260)
+lub2 <- duration(num = 260, units = "minutes")/60
+lub2
+lub3 <- duration(num = 1, units = "days") - duration(num=60, units = "minutes")
+lub3
+lub4 <- c(ddays(x=12), dhours(x=5),dminutes(x=10))
+lub4
+```
+
+* Exercicio BF
+```{r}
+  #definindo o primeiro dia de janeiro
+dtentrada = dmy("01-11-2019")
+dtentrada
+  #qual dia da semana cai o primeiro dia
+wday(dtentrada)
+  #criando criterios para avaliar o que fazer ao descobrir o dia da semana
+    # Opcoes (coordenadas pelos dois ifelse`s`)
+      #Se igual a 5 (quinta-feira), a variavel bf_check recebe 0 - como ? quinta n?o preciso mudar
+      #Se maior que 5 - 6 ou 7 - a variavel recebe 12 menos o wday(dtentrada) (6 ou 7) - como ? maior que 5 adiciono o que falta para a pr?xima quinta-feira 
+      #Se menor que 5 - 1,2,3,4 - a variavel recebe 5 menos o wday(dtentrada) (1,2,3 ou 4) como ? menor que 5, adiciono o que falta para ser 5
+bf_check <- ifelse(wday(dtentrada) == 5, 0, 
+                   ifelse(wday(dtentrada)>5, 12-wday(dtentrada), 5-wday(dtentrada)))
+bf_check
+```
+
+
+* Adiconando 3 componentes ao primeiro dia de novembro
+```{r}
+    # 3 semanas para chegar na quarta semana de novembro (dweeks(3))
+    # 1 dia para sair da quinta-feira e ir para sexta-feira da BF (ddays(1))
+    # correcao para o dia da semana como explicado acima (ddays(bf_check))
+bf <- dtentrada + dweeks(3) + ddays(1) + ddays(bf_check) 
+bf
+```
+
+## CLASS 03 (17/08/2019)
+* Vetores:
+```{r}
+a <- c(334911, 19760626, 759, 096181, 7843)
+a
+b <- 2 * a
+b
+c <- b / 3
+c
+d <- c + a ** 2
+d
+d <- c + a ^ 2
+d
+d <- a * a
+d
+e <- sqrt(d)
+e
+e <- d ^ 1/2
+e
+ai <- rev(a)
+ai
+ai <- a[5:1]
+ai
+```
+
+
+* Como acessar o help: 
+```{r}
+?sum()
+```
+
+
+* Mostrar todas as fun??es do Pacote Base no pop up: 
+
+```{r}
+base::
+```
+
+* Matrizes:
+  + Usando matriz, todos os dados devem ser do mesmo tipo.
+  + No dataframe é possível misturar os tipos de dados.
+
+```{r}
+M <- matrix(1:8, ncol = 2)
+M
+
+M0 <- matrix(1:8, ncol = 2, byrow = TRUE)
+M0
+
+M1 <- matrix(c(a, b, c, d, e, ai), ncol = 5, byrow = TRUE)
+M1
+
+M2 <- matrix(c(a, b, c, d, e, ai), ncol = 6, byrow = FALSE)
+```
+
+* Por default, o byrow é False. Para melhor desempenho, o ideal é omitir esse argumento.
+```{r}
+M2
+M3 <- 0.1 * M1
+M3
+
+M <- as.matrix(attitude)
+M4 <- M[10:14, 1:6]
+M4
+```
+
+* Save Images
+```{r}
+# save.image("C:/Users/logonrmlocal/Downloads/var.RData")
+```
+
+* Mostra os dados em outro tab
+```{r}
+# View(attitude)
+```
+
+* Mostra oa classe do objeto:
+```{r}
+class(attitude) 
+```
+
+* Mostra a dimensão do objeto. Linhas, Colunas
+```{r}
+dim(attitude)
+```
+
+* Converte o dataframe em matriz
+```{r}
+attitude
+as.matrix(attitude)
+```
+
+* Transforma os dados de string para categorias com uma ordem (levels):
+```{r}
+sexo <- rep(c("F", "M"), 5)
+sexo
+factor(sexo) #
+```
+
+* Exercicio
+
+```{r}
+M19 <- matrix(c(1,2), ncol = 19, nrow = 19)
+M19
+
+M191 <- m19 -1
+M191
+
+M1919 <- m191 + 1:19 
+M1919
+```
+
+
+* Exercicio Multiplicacao de Matrizes
+
+```{r}
+M5 <- M1 * M3
+M5
+M6 <- M3 * M1
+M6
+M7 <- M1 %*% M4
+M7
+M8 <- M4 %*% M1
+M8
+
+M5 == M6
+M7 == M8
+```
+
+
+* Matrix Transposta
+```{r}
+M <- as.matrix(attitude)
+M
+MT <- t(M)
+MT
+```
+
+* diag
+```{r}
+vet <- 1:9
+diag(vet)
+diag(5, nrow = 10, ncol = 5)
+```
+
+
+*#* Matriz Identidade:
+```{r}
+M %*% I = M
+```
+
+
+* Solve usado para calcular a Matriz Inversa (M?)
+  + Matriz Inversa: $M %*% M? = I --> O (n^2 + log(n))$ == High CPU intensive
+
+```{r}
+A <- as.matrix(attitude[21:25, 1:5])
+A
+B <- as.matrix(attitude[11:15, 1:5])
+B
+?solve
+C <- solve(A) %*% B
+C
+C <- solve(A, B)
+C
+```
+
+
+* Carregar BrFlights2
+```{r}
+dim(BrFlights2)
+```
+
+
+* Em geral tudo que for numérico não pode ser usado como fator.
+* Não é muito informativo usar estado como fator.
+
+* Conta as qtdes das variá?veis.
+```{r}
+table(BrFlights2$Pais.Origem) 
+BrFlights2$Pais.Origem
+```
+
+* Transformou os strings em factors com levels.
+```{r}
+factor(BrFlights2$Pais.Origem)
+?factor
+
+dt <- data.frame(Sexo = rep(c("F", "M"), 10))
+dt
+dt$Sexo2 <- as.character(dt$Sexo)
+dt
+dt$Sexo2 <- factor(dt$Sexo2, c("M", "F"), labels = c("Masculino", "Feminino"))
+dt
+dt$Sexo2
+dt$Sexo2 <- factor(dt$Sexo, levels = c("M", "F"), labels = 1:2)
+dt
+```
+
+```{r}
+nrow(BrFlights2)
+
+atrasos <- BrFlights2$Partida.Prevista - BrFlights2$Partida.Real
+atrasos
+```
+
+
+
+* Amostras e Simulações
+  + Há duas familias de numeros aleatorios: uniforme e normal. Gauss analisou que os fenomenos naturais seguem uma dist. normal. 
+  + Na Familia Uniforme a chance (prob) de um elemento ser escolhido é igual a de todos os outros elementos.  
+
+```{r}
+# runif --> Random (r) Uniform (unif)
+?runif
+```
+
+```{r}
+set.seed(1)
+amostra <- c("T","R","I","A","N","G","U","L","O")
+sample(x = amostra, replace = FALSE)
+sample(x = amostra, replace = TRUE)
+sample(x = amostra, size = 5)
+sample(x = amostra, size = 10, replace = TRUE, prob = c(1,1,5,1,1,1,1,1,5))
+#prob nao eh probabilidade e sim peso: p("T") = 1/17 e p("I") = 5/17
+```
+
+
+* set.seed -- Util para replicacao de teste. Garante o mesmo resultado apesar da aleatoriedade
+```{r}
+rnorm(5)
+set.seed(8)
+rnorm(5)
+```
+
+```{r}
+dim(airquality)
+summary(airquality)
+head(airquality)
+tail(airquality)
+sample(c(1:10),10)
+
+air <- airquality[sample(1:153,10),]
+air
+
+set.seed(20)
+linhas.idx <- seq_len(nrow(airquality))
+linhas.sample <- sample(linhas.idx, 10)
+airquality[linhas.sample,]
+
+as.integer(runif(min = 1, max = 153, n = 10))
+airquality[as.integer(runif(min = 1, max = 153, n = 10)),]
+```
+
+
+
+* Poucas vezes usamos o runif ou sample na simulação de dados, a familia uniforme nao é natural (alvo de dardos)
+
+```{r}
+hist(rnorm(100))
+hist(rnorm(10000)) # Se eu tiver muito dado simulado, meu modelo chega prox a um resultado teorico.
+
+hist(rnorm(1000, 80, 15))
+
+peso <- rnorm(1000, 80, 15)
+
+summary(peso)
+
+sd(peso)
+
+peso <- rnorm(100000, 80, 15)
+
+summary(peso)
+
+sd(peso) # Chego mais perto do te?rico (=15)
+```
+
+
+* pnorm
+  + Faz o acumulado entre 0--x. Se eu quiser o intervalo x-y, tenho que calcular a diferen?a entre p(0--x) - p(0--y).
+
+```{r}
+?pnorm
+pnorm(70, 80, 15) - pnorm(60, 80, 15)
+```
+
+
+
+* Regressao Linear
+
+  + Exercicio
+
+```{r}
+set.seed(45)
+b0 <- 0.5
+b1 <- 2
+x <- rnorm(100, 0, 1)
+x
+e <- rnorm(100, 0, 2)
+e
+y <- b0 + b1 * x + e 
+y
+
+library(plotly)
+plot_ly(x = x, y = y, type = "scatter")
+
+?plot_ly
+```
+
+## CLASS 04 (19/08/2019)
+
+```{r}
+dim(BrFlights2)
+nrow(BrFlights2)
+```
+
+
+* Exercicio 1
+
+```{r}
+table(BrFlights2$Pais.Origem)
+BrFlights2$Pais.Origem
+var2 <- as.factor(BrFlights2$Pais.Origem) -> BrFlights2$Pais.Origem
+
+var3 <- sqrt((BrFlights2$LatOrig - BrFlights2$LatDest)^2 + (BrFlights2$LongOrig - BrFlights2$LongDest)^2) -> BrFlights2$DistEucl
+
+BrFlights2$Atrasos <- BrFlights2$Partida.Real - BrFlights2$Partida.Prevista
+max(BrFlights2$Atrasos, na.rm =T)
+registro.maior_atraso <- which.max(BrFlights2$Atrasos) # Linha que contem o maior atraso.
+# View(BrFlights2[registro.maior_atraso,])
+# View(BrFlights2$Companhia.Aerea[registro.maior_atraso])
+# View(BrFlights2[registro.maior_atraso, c(4, 9, 12:15)])
+```
+
+
+* Loop - WHILE
+```{r}
+strength = 1000
+for (i in 1:12){
+  strength = strength * 1.01
+}
+print(strenght)
+```
+
+
+* Exercicio 2
+
+```{r}
+AirPassengers
+class(AirPassengers)
+# Série Temporal: Conjunto de frequecia, cuja cada observacao tem a mesma distancia de tempo,ou seja, cada observacao tem o mesmo periodo.
+
+#View(AirPassengers)
+
+ac <- 0
+for ( billy in 1:length(AirPassengers)) {
+  if (billy == 1){
+    ac[billy] = AirPassengers[billy]
+  }else{
+  ac[billy] = ac[billy - 1] + AirPassengers[billy]
+  }
+}
+print(ac)
+```
+
+* Lista todas variaveis carregadas na memoria
+```{r}
+ls()
+```
+
+
+* Exercicio 3
+
+```{r}
+fatorial <- function(n){
+  prod = 1
+  while (n >= 1){
+    prod = prod * n
+    n = n - 1
+  }
+  return (prod)
+}
+
+fatorial(10)
+
+fat2 <- function(n){
+  if (n <= 1){
+    return(1)
+  }else{
+    return(n * fatorial(n-1))
+  }
+}
+
+fat2(10)
+
+# <<- ou ->> Tenta subir ou descer escopos de environments
+```
+
+## CLASS 05 (26/8/2019)
+
+* Obtendo dados com o R
+```{r}
+#setwd() -> Ajusta o diretorio de trabalho
+#getwd() -> Obtem o diretorio de trabalho atual
+#Caminho Relativo: "./data", "../"
+#Caminho absoluto: "/r/fiap/data"
+#Formato Windows: "C:\\r\\fiap\\data
+#Boa pratica: Separar seus dados de analise dos scripts de analise
+```
+
+* Obter dados da Internet
+```{r}
+# getwd()
+# 
+# file.exists ('data')
+# 
+# if(!file.exists ('data')){
+#   dir.create('data')
+# }
+# 
+# file.url = 'https://storage.googleapis.com/ds-publico/IE1-04.xlsx'
+# file.local = file.path('./data', basename(file.url))
+# download.file(url = file.url, destfile = file.local , mode='wb')
+# basename(file.url)
+# file.local
+# 
+# download_url <- function(url1){
+#     if(!file.exists ('data')){
+#   dir.create('data')
+#     }
+#   file.url = url1
+#   print(paste("URL:", file.url))
+#   file.base = basename(file.url)
+#   file.dest = file.path('./data', file.base)
+#   print(paste("Destino:", file.dest))
+#   download.file(url = file.url, destfile = file.dest , mode='wb')
+# }
+#   
+# download_url('https://storage.googleapis.com/ds-publico/Copas.csv' )
+# download_url('https://storage.googleapis.com/ds-publico/Copas-Partidas.csv' )
+# download_url('https://storage.googleapis.com/ds-publico/Copas-Jogadores.csv' )
+```
+
+
+* read.table abre um arquivo e o converte em data.frame
+
+```{r}
+# library(readr)
+# Copas <- read_csv("data/Copas.csv")
+# View(Copas)
+# 
+# library(readr)
+# Copas_Partidas <- read_csv("data/Copas-Partidas.csv")
+# View(Copas_Partidas)
+# 
+# library(readr)
+# Copas_Jogadores <- read_csv("data/Copas-Jogadores.csv")
+# View(Copas_Jogadores)
+```
+
+
+
+* Limpar as variaveis
+```{r}
+#rm(list = ls())
+```
+
+
+* Exercicio
+```{r}
+# download_url('https://storage.googleapis.com/ds-publico/cameras.baltimore.xlsx')
+# 
+# library(readxl)
+# cameras_baltimore <- read_excel("data/cameras.baltimore.xlsx")
+# View(cameras_baltimore)
+# 
+# Cam_N_Lat <- which.max(cameras_baltimore$Lat)
+# Cam_S_Lat <- which.min(cameras_baltimore$Lat)
+# Cam_W_Long <- which.min(cameras_baltimore$Long)
+# Cam_E_Long <- which.max(cameras_baltimore$Long)
+# 
+# View(cameras_baltimore[Cam_N_Lat,])
+# View(cameras_baltimore[Cam_S_Lat,])
+# View(cameras_baltimore[Cam_E_Long,])
+# View(cameras_baltimore[Cam_W_Long,])
+# 
+# library(dplyr)
+# View(starwars)
+# View(starwars[which.max(starwars$mass),])
+# s2 <- mutate (starwars, imc = mass/ ((height / 100) ^2))
+# View(s2)
+# View(starwars[which.max(s2$imc),])
+```
+
+
+* Pipe
+```{r}
+starwars %>% View(.)
+starwars %>% View()
+
+starwars %>% head(. , 6)
+7 %>% head(starwars, .)
+
+starwars %>% filter(species == "Droid")
+
+starwars %>% filter(species == "Droid") %>% View()
+
+load("P:/08IA/BrFlights2.RData")
+
+# View(BrFlights2)
+# AzulFlights <- BrFlights2 %>% filter(Companhia.Aerea == "AZUL") 
+# View(AzulFlights)
+# dim(AzulFlights)
+```
+
+
+* Dplyr - Select (Não confunda com select de SQL)
+
+```{r}
+starwars %>% select(name, ends_with("color")) %>% View()
+```
+
+
+* Select pode definir nova ordem de colunas e/ou linhas
+
+AzulFlights <- BrFlights2 %>% 
+              filter(Companhia.Aerea == "AZUL") %>%              
+              select(Companhia.Aerea, Cidade.Origem, Cidade.Destino, Situacao.Voo)
+```{r}
+AzulFlights <- BrFlights2 %>% 
+              filter(Companhia.Aerea == "AZUL") %>%              
+              select(Companhia.Aerea, Cidade.Origem, Cidade.Destino, Situacao.Voo)
+
+# View(AzulFlights)
+```
+
+* DPLYR - ARRANGE
+
+```{r}
+starwars %>% arrange(desc(mass))
+
+# View(BrFlights2)
+
+BrFlights2 %>% mutate(TempoAtrasado = Chegada.Real - Chegada.Prevista ) %>%
+          filter(Codigo.Tipo.Linha != "Internacional") %>%
+          arrange(desc(TempoAtrasado)) %>%
+          head(100) %>%
+          # View()
+```
+
+
+* DYPLR - RENAME
+
+```{r}
+rename(starwars,
+       nome = name,
+       altura = height,
+       massa = mass)
+```
+
+
+* DYPLR - Agregacoes
+
+```{r}
+starwars %>% 
+  group_by(species) %>% 
+  summarise(j = n()) %>%
+  # View()
+
+starwars %>% 
+  group_by(species) %>% 
+  summarise(
+    j = n(),
+    mass = mean(mass, na.rm = TRUE)
+    ) %>%
+  filter(j > 1) %>%
+  # View()
+
+BrFlights2 %>% mutate(TempoAtrasado = Chegada.Real - Chegada.Prevista,
+                      DistEucl = sqrt((BrFlights2$LatOrig - BrFlights2$LatDest)^2 + (BrFlights2$LongOrig - BrFlights2$LongDest)^2)) %>%
+          arrange(desc(TempoAtrasado)) %>%
+          head(100) %>%
+          group_by(Companhia.Aerea) %>%
+          summarise(
+            j = n(),
+            atraso = mean(TempoAtrasado, na.rm = TRUE),
+            distancia = mean(DistEucl, na.rm = TRUE)
+            ) %>%
+          # View()
+```
+
+
+## CLASS 06 (16/09/2019)
+
+* Plots
+```{r}
+x = -10:10
+plot(x = x, y = x ** 2, main = 'Parabola')
+
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'l')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'p')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'b')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'o')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'h')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 's')
+plot(x = x, y = x ** 2, main = 'Parabola', type = 'S')
+
+head(cars)
+summary(cars)
+plot(x = cars$speed, y = cars$dist)
+plot(cars)
+```
+
+
+*Histograma
+```{r}
+?hist
+hist(x**2)
+```
+
+
+*BoxPlots
+```{r}
+summary(airquality)
+boxplot(airquality)
+
+summary(airquality$Ozone)
+boxplot(airquality$Ozone, outline =  T)
+boxplot(airquality$Ozone, outline =  F)
+
+library(dplyr)
+airquality
+# View(airquality)
+```
+
+
+* Exemplo 1a
+```{r}
+airquality %>% 
+  select(Ozone, Month) %>%
+  filter(Month == '5') %>%
+  arrange(Ozone) -> gm
+summary(gm$Ozone)
+plot(seq_along(gm$Ozone), gm$Ozone)
+lines(x = c(1,31), y = c(1,1), col = "blue")
+lines(x = c(1,31), y = c(11,11), col = "blue")
+lines(x = c(1,31), y = c(18,18), col = "red")
+lines(x = c(1,31), y = c(31.5,31.5), col = "blue")
+lines(x = c(1,31), y = c(115,115), col = "blue")
+```
+
+
+*Exemplo 1b
+```{r}
+airquality %>% 
+  filter(Month == '5') %>%
+  select(Ozone) %>%
+  arrange(Ozone) %>% 
+  unlist()-> gm
+summary(gm)
+
+plot(seq_along(gm), gm)
+lines(x = c(1,31), y = c(1,1), col = "blue")
+lines(x = c(1,31), y = c(11,11), col = "blue")
+lines(x = c(1,31), y = c(18,18), col = "red")
+lines(x = c(1,31), y = c(31.5,31.5), col = "blue")
+lines(x = c(1,31), y = c(115,115), col = "blue")
+```
+
+
+* Boxplot using Formula
+
+```{r}
+a<- formula(Ozone ~ Wind) #Responda Ozone em funcao de Wind
+class(a)
+```
+
+
+* Ex1
+```{r}
+boxplot(formula(airquality$Ozone ~ airquality$Month))
+```
+
+
+* Ex2
+```{r}
+f1 <- formula(Ozone ~ Month)
+boxplot(f1, data = airquality) 
+
+env_meu <- new.env()
+
+env_meu$Ozo <- airquality$Ozone
+env_meu$Mon <- airquality$Month
+
+boxplot(formula = Ozo ~ Mon)
+boxplot(formula = Ozo ~ Mon, data = env_meu)
+
+Ozo <- airquality$Ozone
+Mon <- airquality$Month
+boxplot(formula = Ozo ~ Mon)
+
+Temp <- airquality$Temp
+boxplot(formula = Temp ~ Mon)
+
+Wind <- airquality$Wind
+boxplot(formula = Wind ~ Mon)
+
+Solar <- airquality$Solar.R
+boxplot(formula = Solar ~ Mon)
+```
+
+
+
+* Relacao entre variaveis
+
+```{r}
+plot(formula = Ozo ~ Wind)
+my_reg <- lm(data = airquality, formula = Ozo ~ Wind)
+my_reg
+abline(my_reg, col = "red")
+```
+
+
+* Multiplos Graficos
+```{r}
+par(mfrow=c(1,2))
+plot(airquality$Wind, airquality$Ozone)
+plot(airquality$Solar.R, airquality$Ozone)
+par(mfrow=c(1,1))
+```
+
+
+* Plotly
+```{r}
+library(plotly)
+```
+
+
+* Monta o gráfico e armazena em p
+```{r}
+plot_ly(data = airquality,
+        x = ~Wind, y = ~Ozone,
+        text = ~paste0(Day, '/', Month),
+        type = 'scatter', mode ='markers') -> p
+```
+
+* Exibe p
+```{r}
+print( p )
+```
+
+
+* Lattice
+
+```{r}
+library(lattice)
+state <- data.frame(state.x77,
+                    region = state.region)
+
+xyplot(Life.Exp ~ Income | region,
+       data = state,
+       layout = c(4, 1))
+```
+
+
+
+
+## Shiny App
+
+```{r, echo = TRUE}
+shiny::shinyAppDir("teste")
+```
+
+
+## Distribution Types
+
+```{r, echo = TRUE}
+shiny::shinyAppDir("dist")
+#https://stackoverflow.com/questions/44256853/rendering-images-in-documents-and-embedded-shiny-apps
+```
+
+## Case Study
+
+Proposal: I intend to show in the next lines the resolution of a problem presented in the book: Bussab,W.O. ; Morettin, P.A. *Estatística Básica*. São Paulo: 2017 Saraiva Educação.
+
+### Inference for various populations {.css_class}  
+
+A psychologist is investigating the relationship between the time it takes for an individual to react to a visual stimulus $(y)$ and some factors such as gender $(w)$, age $(x)$, and visual acuity ($z$, measured as a percentage). The results were tabled, as follows:  
+
+```{r results = 'asis', echo = TRUE}
+
+n <- c(1:20)
+y <- c(96,92,106,100,98,104,110,101,116,106,109,100,112,105,118,108,113,112,127,117)
+x <- c(rep(20,4),rep(25,4),rep(30,4),rep(35,4),rep(40,4))
+w <- c('h','m','h','m','m','h','h','m','m','h','h','m','m','m','h','h','m','m','h','h')
+z <- c(90,100,80,90,100,90,80,90,70,90,90,80,90,80,70,90,90,90,60,80)  
+
+my_data <- data.frame(n,y,w,x,z)  
+
+knitr::kable(my_data, caption = "Reaction time to a visual stimulus (y) and visual acuity (z) of 20 individuals, by sex (w) and age (x)", align = c('c', 'c', 'c'))
+
+```
+
+
+```{r , echo = TRUE}
+paste("We have the reaction time for n =",length(y), "individuals. (values for random variable y).")
+```
+
+* We observe we have two levels for the sex factor:
+    + $i = 1$: male (H)
+    + $i = 2$: female (M)
+
+```{r , echo = TRUE}
+paste("n1 = n2 =", length(w) / 2)
+```
+
+* The age factor has 5 levels:
+    + $i = 1$: individuals with 20 years old,
+    + $i = 2$: individuals with 25 years old,
+    + $i = 3$: individuals with 30 years old,
+    + $i = 4$: individuals with 35 years old,
+    + $i = 5$: individuals with 40 years old,
+
+```{r, echo=TRUE}
+
+paste("n1 = n2 = n3 = n4 = n5 =", length(x) / 5)
+
+```
+
+* Visual acuity as a percentage of complete vision also generates five levels:
+    + $i = 1$: individuals with 100% of acuity,
+    + $i = 2$: individuals with 90% of acuity,
+    + $i = 3$: individuals with 80% of acuity,
+    + $i = 4$: individuals with 70% of acuity,
+    + $i = 5$: individuals with 60% of acuity,
+    + $n_1 = 2, n_2 = 10, n_3 = 5, n_4 = 2, n_5 = 1$.
+
+Therefore, it was not possible to control the variable $z$ a priori as the other two, since it requires ophthalmic examinations for its measurement. Hence, the unbalance of the observed sizes. This factor is known as cofactor type.
+
+* Thus, for the sex factor, we have $i = 1, 2, j = 1, 2, 3, ..., 10$, and for the age factor, the same model with $i = 1, 2, ..., 5, j = 1, 2, 3, 4$.
+
+Figure 1 shows the graphic model of this experiment:
+```{r , echo = TRUE}
+plot(formula = y ~ x, main = "plot(formula = y ~x)")
+```
+
+#### Simple Linear Regression Model {.css_class}  
+
+A simple linear regression model can be represented as: $y_i  = α + βx_i  + e_i,i = 1,2,...,n$
+
+The amount of information lost by the model or the sum of squares of errors (or deviations) is given by:
+$$SQ(α,β)= ∑ (e_i )^2 = ∑ (y_i-(α+ β∙x_i ))^2$$
+
+To find the minimum value of SQ, we must derive SQ with respect to $α$ and $β$ and match the derivatives to zero, obtaining:
+
+$$SQ_β= 2∙∑(y_i-α-β∙x_i )∙(-x_i ) = 0$$
+$$SQ_α= 2∙∑(y_i-α-β∙x_i )∙(-1) = 0$$
+
+Solving this system of equations we get:
+
+$$α ̂=  (∑ y_i)/n- β ̂ (∑x_i )/n= y ̅- β ̂∙x ̅$$
+$$β ̂=  (∑x_i y_i-((∑x_i )∙(∑y_i ))/n)/(∑x_i^2-(∑x_i )^2/n)=  (∑x_i y_i-n(xy) ̅ /(∑x_i^2-nx ̅^2 )$$
+
+Where, $α ̂$ and $β ̂$ are the **estimated** linear and angular coefficients, respectively.
+
+In our Case Study, we assume:
+
+$y_i$: reaction time of i-th individual;  
+$x_i$: age of i-th individual;  
+$e_i$: deviation, $i = 1, 2, ..., 20.
+
+$n = 20$,  
+$∑y_i= 2150$,  
+$∑i=600$,  
+$∑x_i∙y_i=65400$,  
+$y ̅=107.5$,   
+$x ̅=30$,  
+$∑x^2=1900$  
+
+$$(β ) ̂=(65400- (20)(30)(107.5))/(19000-(20) (30)^2 )=0,90$$
+$$α ̂=107.5-(0,90)(30)=80,5$$
+What gives us the adjusted model: $$y ̂=80,5+0,9∙x_i,i=1,2,…,20$$
+
+With this model, we can predict, for example, the average reaction time for 33-year-olds, which is an unobserved age group: $$y ̂(33)=80,5+0,9(33)=110,2.$$
+
+The graph illustrated bellow adds to the previous one the line obtained by the **calculated linear regression**.
+
+
+```{r , echo = TRUE}
+plot(formula = y ~ x, main = "lm(data = my_data, formula = y ~ x)")
+abline(lm(data = my_data, formula = y ~ x), col = "red")
+```
+
+
+
+###  
+
